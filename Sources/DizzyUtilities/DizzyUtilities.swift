@@ -1,17 +1,17 @@
 import SwiftUI
 
 @available(macOS 13.0, iOS 16.0, *)
-struct ProportionalHStack: Layout {
+public struct ProportionalHStack: Layout {
     let alignment: VerticalAlignment
-    init(alignment: VerticalAlignment = .center) {
+    public init(alignment: VerticalAlignment = .center) {
         self.alignment = alignment
     }
     
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+    public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         return proposal.replacingUnspecifiedDimensions()
     }
     
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+    public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         print(bounds)
         print(dump(proposal))
         let assignedWidths = getAssignedWidths(from: bounds, subviews: subviews)
@@ -59,12 +59,12 @@ struct ProportionalHStack: Layout {
 }
 
 @available(macOS 13.0, iOS 16.0, *)
-struct ProportionalVStack: Layout {
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+public struct ProportionalVStack: Layout {
+    public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         return proposal.replacingUnspecifiedDimensions()
     }
     
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+    public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         let subviewHeights = subviews.map {
             let newProposal = ProposedViewSize(width: proposal.width, height: proposal.height ?? 0 * $0[ViewProportion.self])
             return $0.sizeThatFits(newProposal).height
