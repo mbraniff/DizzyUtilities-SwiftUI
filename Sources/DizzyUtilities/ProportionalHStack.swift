@@ -20,8 +20,8 @@ public struct ProportionalHStack: Layout {
     
     public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         let assignedWidths = getAssignedWidths(from: bounds, subviews: subviews)
-        var xPos = 0.0
-        let yPos = alignment == .center ? bounds.height/2 : alignment == .bottom ? bounds.height : 0.0
+        var xPos = bounds.origin.x
+        let yPos = bounds.origin.y + (alignment == .center ? bounds.height/2 : alignment == .bottom ? bounds.height : 0.0)
         for (index, width) in assignedWidths.enumerated() {
             xPos += width / 2
             let newProposal = ProposedViewSize(width: width, height: proposal.height)

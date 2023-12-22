@@ -20,8 +20,8 @@ public struct ProportionalVStack: Layout {
     
     public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         let assignedHeights = getAssignedHeights(from: bounds, subviews: subviews)
-        let xPos = alignment == .center ? bounds.width/2 : alignment == .trailing ? bounds.width : 0.0
-        var yPos = 0.0
+        let xPos = bounds.origin.x + (alignment == .center ? bounds.width/2 : alignment == .trailing ? bounds.width : 0.0)
+        var yPos = bounds.origin.y
         for (index, height) in assignedHeights.enumerated() {
             yPos += height / 2
             let newProposal = ProposedViewSize(width: proposal.width, height: height)
