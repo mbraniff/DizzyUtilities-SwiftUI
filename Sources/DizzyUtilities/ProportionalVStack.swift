@@ -36,11 +36,13 @@ public struct ProportionalVStack: Layout {
     
     private func getAssignedHeights(from bounds: CGRect, subviews: Subviews) -> [CGFloat] {
         let heightProportions = subviews.map { $0[ViewProportion.self] }
+        let priorityIndex = subviews.enumerated().sorted { $0.element.priority > $1.element.priority }.map { $0.offset }
         
         var usedHeight: CGFloat = 0.0
         var assignedHeights: [CGFloat] = Array(repeating: 0.0, count: subviews.count)
         
-        for (index, proportion) in heightProportions.enumerated() {
+        for index in priorityIndex {
+            let proportion = heightProportions[index]
             if usedHeight + proportion > 1.0 {
                 break
             }

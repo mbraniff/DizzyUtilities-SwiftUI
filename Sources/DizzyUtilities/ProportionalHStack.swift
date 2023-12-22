@@ -36,11 +36,13 @@ public struct ProportionalHStack: Layout {
     
     private func getAssignedWidths(from bounds: CGRect, subviews: Subviews) -> [CGFloat] {
         let widthProportions = subviews.map { $0[ViewProportion.self] }
+        let priorityIndex = subviews.enumerated().sorted { $0.element.priority > $1.element.priority }.map { $0.offset }
         
         var usedWidth: CGFloat = 0.0
         var assignedWidths: [CGFloat] = Array(repeating: 0.0, count: subviews.count)
         
-        for (index, proportion) in widthProportions.enumerated() {
+        for index in priorityIndex {
+            let proportion = widthProportions[index]
             if usedWidth + proportion > 1.0 {
                 break
             }
