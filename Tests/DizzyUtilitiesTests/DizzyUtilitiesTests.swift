@@ -1,11 +1,7 @@
 import XCTest
 @testable import DizzyUtilities
+import SwiftUI
 
+@available(macOS 13.0, iOS 16.0, *)
 final class DizzyUtilitiesTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(DizzyUtilities().text, "Hello, World!")
-    }
 }
