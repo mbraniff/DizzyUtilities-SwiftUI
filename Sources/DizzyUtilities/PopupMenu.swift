@@ -28,11 +28,17 @@ struct PopoverLayout<T>: _VariadicView_MultiViewRoot {
 
 @available(iOS 16.4, *)
 public struct PopupMenu<T, Content>: View where Content: View {
-    public var title: String
-    @Binding public var selection: T
-    @ViewBuilder public var content: Content
+    var title: String
+    var selection: Binding<T>
+    @ViewBuilder var content: Content
     
     @State private var showMenu: Bool = false
+    
+    public init(title: String, selection: Binding<T>, @ViewBuilder content: () -> Content) {
+        self.title = title
+        self.selection = selection
+        self.content = content()
+    }
     
     public var body: some View {
         Button {
@@ -45,7 +51,7 @@ public struct PopupMenu<T, Content>: View where Content: View {
         .popover(isPresented: $showMenu, attachmentAnchor: .point(.center)) {
             ScrollView {
                 VStack {
-                    _VariadicView.Tree(PopoverLayout(selection: $selection, isShowing:  $showMenu)) {
+                    _VariadicView.Tree(PopoverLayout(selection: selection, isShowing:  $showMenu)) {
                         content
                             .frame(minWidth: 125, maxWidth: 300, idealHeight: 65)
                     }
