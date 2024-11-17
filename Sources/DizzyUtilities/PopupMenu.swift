@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 16.4, *)
+@available(macOS 13.0, iOS 16.4, *)
 struct PopoverLayout<T>: _VariadicView_MultiViewRoot {
     @Binding var selection: T
     @Binding var isShowing: Bool
@@ -26,7 +26,7 @@ struct PopoverLayout<T>: _VariadicView_MultiViewRoot {
     }
 }
 
-@available(iOS 16.4, *)
+@available(macOS 13.3, iOS 16.4, *)
 public struct PopupMenu<T, Content>: View where Content: View {
     var title: String
     var selection: Binding<T>
@@ -68,14 +68,14 @@ struct MenuTagTrait<T>: _ViewTraitKey {
     static var defaultValue: T? { nil }
 }
 
-@available(iOS 13.0, *)
+@available(macOS 13.0, iOS 13.0, *)
 extension View {
     public func menuTag<T>(_ tag: T?) -> some View {
         _trait(MenuTagTrait<T>.self, tag)
     }
 }
 
-@available(iOS 16.4, *)
+@available(macOS 13.3, iOS 16.4, *)
 #Preview {
     @State var selection = 0
     return VStack {
