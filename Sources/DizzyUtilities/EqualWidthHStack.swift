@@ -8,21 +8,21 @@
 import SwiftUI
 
 @available(macOS 13.0, iOS 16.0, *)
-struct EqualWidthHStack: Layout {
+public struct EqualWidthHStack: Layout {
     private let fitToView: Bool
     
     init(fitToView: Bool = true) {
         self.fitToView = fitToView
     }
     
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+    public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let maxSize = getMaxSize(subviews: subviews, proposal: proposal)
         let spacing = getSpacing(subviews: subviews)
         
         return CGSize(width: (maxSize.width * CGFloat(subviews.count)) + spacing.reduce(.zero) { $0 + $1 } , height: maxSize.height)
     }
     
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+    public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         let maxSize = getMaxSize(subviews: subviews, proposal: proposal)
         let spacing = getSpacing(subviews: subviews)
         
@@ -67,15 +67,15 @@ struct EqualWidthHStack: Layout {
 }
 
 @available(macOS 13.0, iOS 16.0, *)
-struct EqualWidthVStack: Layout {
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+public struct EqualWidthVStack: Layout {
+    public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let maxSize = getMaxSize(subviews: subviews, proposal: proposal)
         let spacing = getSpacing(subviews: subviews)
         
         return CGSize(width: maxSize.width , height: (maxSize.height * CGFloat(subviews.count)) + spacing.reduce(.zero) { $0 + $1 })
     }
     
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+    public func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         let maxSize = getMaxSize(subviews: subviews, proposal: proposal)
         let spacing = getSpacing(subviews: subviews)
         
