@@ -11,7 +11,7 @@ import SwiftUI
 public struct EqualWidthHStack: Layout {
     private let fitToView: Bool
     
-    init(fitToView: Bool = true) {
+    public init(fitToView: Bool = true) {
         self.fitToView = fitToView
     }
     
