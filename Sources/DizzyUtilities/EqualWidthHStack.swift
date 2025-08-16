@@ -10,9 +10,11 @@ import SwiftUI
 @available(macOS 13.0, iOS 16.0, *)
 public struct EqualWidthHStack: Layout {
     private let fitToView: Bool
+    private var spacing: CGFloat?
     
-    public init(fitToView: Bool = true) {
+    public init(fitToView: Bool = true, spacing: CGFloat? = nil) {
         self.fitToView = fitToView
+        self.spacing = spacing
     }
     
     public func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
@@ -60,6 +62,9 @@ public struct EqualWidthHStack: Layout {
     }
     
     private func getSpacing(subviews: Subviews) -> [CGFloat] {
+        if let spacing {
+            return Array(repeating: spacing, count: subviews.count - 1)
+        }
         return subviews.indices.dropLast().map {
             subviews[$0].spacing.distance(to: subviews[$0+1].spacing, along: .horizontal)
         }
